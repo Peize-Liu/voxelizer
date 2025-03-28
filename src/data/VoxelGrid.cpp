@@ -286,13 +286,25 @@ int32_t VoxelGrid::occludedBy(int32_t i, int32_t j, int32_t k, const Eigen::Vect
     if (Pos[0] >= int32_t(sizex_) || Pos[1] >= int32_t(sizey_) || Pos[2] >= int32_t(sizez_)) break;
 
     int32_t idx = index(Pos[0], Pos[1], Pos[2]);
-    bool occupied = voxels_[idx].count > 0;
-    if (visited != nullptr) visited->push_back(Eigen::Vector3i(Pos[0], Pos[1], Pos[2]));
 
-    if (occupied) {
+    bool occupied = (voxels_[idx].count > 0);
+    bool isSelf = (Pos[0] == i && Pos[1] == j && Pos[2] == k && iteration == 0);
+
+    // if (occupied) {
+    //   for (auto i : traversed) occludedBy_[i] = idx;
+    // }
+
+    if (occupied && !isSelf) {
       for (auto i : traversed) occludedBy_[i] = idx;
       return idx;
     }
+    
+    if (visited != nullptr) visited->push_back(Eigen::Vector3i(Pos[0], Pos[1], Pos[2]));
+
+    // if (occupied) {
+    //   for (auto i : traversed) occludedBy_[i] = idx;
+    //   return idx;
+    // }
 
     traversed.push_back(idx);
 

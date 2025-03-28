@@ -55,6 +55,8 @@ int32_t main(int32_t argc, char** argv) {
   priorGrid.initialize(config.voxelSize, config.minExtent, config.maxExtent);
   pastGrid.initialize(config.voxelSize, config.minExtent, config.maxExtent);
 
+  //TODO: pointcloud jump sample maybe?
+
   std::vector<Eigen::Matrix4f> poses = reader.poses();
 
   uint32_t current = 0;
@@ -117,7 +119,10 @@ int32_t main(int32_t argc, char** argv) {
 //      std::cout << "update invalid took " << Stopwatch::toc() << std::endl;
 
       // store grid in mat file.
-      saveVoxelGrid(priorGrid, output_voxel_dirname, outname.str(), "input");
+      // priorGrid()
+      // saveVoxelGrid(priorGrid, output_voxel_dirname, outname.str(), "input");
+
+      saveVoxelGrid(pastGrid, output_voxel_dirname, outname.str(), "input");
       saveVoxelGrid(pastGrid, output_voxel_dirname, outname.str(), "target");
 
 
