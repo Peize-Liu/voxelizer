@@ -125,7 +125,6 @@ int32_t main(int32_t argc, char** argv) {
       saveVoxelGrid(pastGrid, output_voxel_dirname, outname.str(), "input");
       saveVoxelGrid(pastGrid, output_voxel_dirname, outname.str(), "target");
 
-
     } else {
       std::cout << "skipped." << std::endl;
     }
